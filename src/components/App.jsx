@@ -11,9 +11,10 @@ class App extends Component {
     bad: 0,
   };
 
-  handleAddFeedback = option => {
+  handleAddFeedback = evt => {
+    const name = evt.target.name;
     this.setState(prevState => ({
-      [option]: prevState[option] + 1,
+      [name]: prevState[name] + 1,
     }));
   };
 
@@ -37,21 +38,23 @@ class App extends Component {
       <>
         <Section title={'Please, leave feedback'}>
           <FeedbackOptions
-            buttonOptions={buttonOptions}
+            options={buttonOptions}
             onLeaveFeedback={this.handleAddFeedback}
           />
         </Section>
-        { countedTotalFeedback !== 0 ?
-        <Section title={'Statistics'}>
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={countedTotalFeedback}
-            positivePercentage={positiveFeedback}
-          />
-        </Section> : <Notification message="There is no feedback"/>
-        }
+        {countedTotalFeedback !== 0 ? (
+          <Section title={'Statistics'}>
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={countedTotalFeedback}
+              positivePercentage={positiveFeedback}
+            />
+          </Section>
+        ) : (
+          <Notification message="There is no feedback" />
+        )}
       </>
     );
   }

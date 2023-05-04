@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const FeedbackOptions = ({ buttonOptions, onLeaveFeedback }) => {
+const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
     <div>
-      {buttonOptions.map(option => {
+      {options.map(option => {
         return (
           <button
             type="button"
             key={option}
-            onClick={() => onLeaveFeedback(option)}
+            name={option}
+            onClick={onLeaveFeedback}
           >
             {option}
           </button>
@@ -20,7 +21,8 @@ const FeedbackOptions = ({ buttonOptions, onLeaveFeedback }) => {
 };
 
 FeedbackOptions.propTypes = {
-  buttonOptions: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
 };
 
 export default FeedbackOptions;
